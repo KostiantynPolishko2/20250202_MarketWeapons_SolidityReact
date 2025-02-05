@@ -1,19 +1,19 @@
-.App {
+.SC_App {
   text-align: center;
 }
 
-.App-logo {
+.SC_App-logo {
   height: 40vmin;
   pointer-events: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+  .SC_App-logo {
+    animation: SC_App-logo-spin infinite 20s linear;
   }
 }
 
-.App-header {
+.SC_App-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -24,11 +24,11 @@
   color: white;
 }
 
-.App-link {
+.SC_App-link {
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
+@keyframes SC_App-logo-spin {
   from {
     transform: rotate(0deg);
   }
