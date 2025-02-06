@@ -39,7 +39,7 @@ export const TxData: FC<ITxId> = (props)=> {
         e.preventDefault();
         setTxId(e.currentTarget.parentElement?.previousElementSibling?.firstElementChild?.nextElementSibling?.textContent || "undefined");
         // console.log('discard txId', txId);
-        await executeTxById(txId, props.contract) && setTxData(null);
+        await discardTxById(txId, props.contract) && setTxData(null);
     }
 
     useEffect(()=>{
@@ -52,7 +52,7 @@ export const TxData: FC<ITxId> = (props)=> {
             <p>Transaction Data</p>
             <div className="flex-container">
                 <h4 className="tx-overflow">{props.txId}</h4>
-                <h4>'deleted / executed'</h4>
+                {props.txId == 'undefined' ? <></> : <h4>deleted / executed</h4>}           
             </div>
         </TxDataWrapper>)
     }

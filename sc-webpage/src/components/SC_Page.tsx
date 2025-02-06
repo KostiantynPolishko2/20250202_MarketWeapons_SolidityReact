@@ -9,6 +9,7 @@ import { IContractFields } from './ContractItem/ContractItem';
 import { BlockTopLeft, BlockTopRight} from './styles/standard.styled';
 import QueuedEvents from './Events/Queued/QueuedEvents';
 import TxData from './TxData/TxData';
+import FundSources from './FundSources/FundSources';
 
 export const HandleTxIdContext = createContext((e: React.FormEvent<HTMLElement>):void=>{});
 
@@ -51,13 +52,16 @@ const SC_Page: FC = () => {
         <BlockTopLeft _top={0} _left={10}>
           <ContractItem _owner={contractFields?._owner} _item={contractFields?._item} _time={contractFields?._time}/>
         </BlockTopLeft>
-        <BlockTopLeft _top={90} _left={10}>
+        <BlockTopLeft _top={140} _left={10}>
           <HandleTxIdContext value={handleTxId}>
             <QueuedEvents contract={lockTimesSC}/>
           </HandleTxIdContext>
         </BlockTopLeft>
-        <BlockTopRight _top={90} _right={10}>
+        <BlockTopRight _top={140} _right={10}>
           <TxData txId={txId} contract={lockTimesSC}/>
+        </BlockTopRight>
+        <BlockTopRight _top={0} _right={10}>
+          <FundSources/>
         </BlockTopRight>
       </header>
     </div>
