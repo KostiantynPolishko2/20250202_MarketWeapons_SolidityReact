@@ -62,3 +62,12 @@ export const executeTxById = async(txId: string, contract: Contract | null) => {
         return null;
     }
 }
+
+export const discardTxById = async(txId: string, contract: Contract | null) => {
+    try{
+        return await contract?.discard(txId);
+    }
+    catch (error){
+        return null;
+    }
+}
