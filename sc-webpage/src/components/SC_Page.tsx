@@ -1,4 +1,4 @@
-import React, {FC, useState, useEffect} from 'react';
+import React, {FC, useState, useEffect, createContext} from 'react';
 import {Contract} from 'ethers';
 import 'the-new-css-reset';
 import './SC_Page.css';
@@ -6,14 +6,18 @@ import {getMarketWeaponsSC, getContractItem} from './utils/MarketWeaponsSC';
 import { getTimeLockSC } from './utils/TimeLockSC';
 import ContractItem from './ContractItem/ContractItem';
 import { IContractFields } from './ContractItem/ContractItem';
-import { BlockTopLeft} from './styles/standard.styled';
+import { BlockTopLeft, BlockTopRight} from './styles/standard.styled';
 import QueuedEvents from './Events/Queued/QueuedEvents';
+import TxData from './TxData/TxData';
+
+export const HandleTxIdContext = createContext((e: React.FormEvent<HTMLElement>):void=>{});
 
 const SC_Page: FC = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [marketWeaponsSC, setMarketWeaponsSC] = useState<Contract | null>(null);
   const [lockTimesSC, setLockTimeSC] = useState<Contract | null>(null);
   const [contractFields, setContractFields] = useState<IContractFields>();
+  const [txId, setTxId] = useState<string>("undefined");
 
   const setUpMWSC = async () => {
     setMarketWeaponsSC(await getMarketWeaponsSC());
@@ -29,6 +33,12 @@ const SC_Page: FC = () => {
     setIsLoaded(true);
   }
 
+  const handleTxId = (e: React.FormEvent<HTMLElement>) => {
+    e.preventDefault();
+    setTxId(e.currentTarget.firstElementChild?.nextElementSibling?.textContent || "undefined");
+    console.log('rows events', e.currentTarget.firstElementChild?.nextElementSibling?.textContent);
+  }
+
   useEffect(() => {
     setUpMWSC();  // init entity of MarketWeapons.sol
     handleLTSC();  // init entity of TimeLock.sol
@@ -42,8 +52,13 @@ const SC_Page: FC = () => {
           <ContractItem _owner={contractFields?._owner} _item={contractFields?._item} _time={contractFields?._time}/>
         </BlockTopLeft>
         <BlockTopLeft _top={90} _left={10}>
-          <QueuedEvents contract={lockTimesSC}/>
+          <HandleTxIdContext value={handleTxId}>
+            <QueuedEvents contract={lockTimesSC}/>
+          </HandleTxIdContext>
         </BlockTopLeft>
+        <BlockTopRight _top={90} _right={10}>
+          <TxData txId={txId} contract={lockTimesSC}/>
+        </BlockTopRight>
       </header>
     </div>
   );

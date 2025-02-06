@@ -44,3 +44,12 @@ export const fetchQueuedEvents = async(contract: Contract | null):Promise<IQueue
         return formattedEvents;
     }
 }
+
+export const getTxDataByID = async(txId: string, contract: Contract | null) => {
+    try{
+        return await contract?.getTxData(txId);
+    }
+    catch (error){
+        return null;
+    }
+}

@@ -25,5 +25,6 @@ export const QueuedRowWrapper = styled.tr<IQueuedEventsRow>`
         overflow-wrap: break-word;
         word-break: break-all;
         padding: 0 2px;
+        cursor: pointer;
     }
 `

@@ -1,5 +1,5 @@
 import React, {FC, useState, useEffect} from "react";
-import {Contract, EventLog} from 'ethers';
+import {Contract} from 'ethers';
 import { QueuedEventsWrapper } from "./QueuedEvents.styled";
 import { IQueuedEvent } from "./QueuedRecord";
 import {QueuedRecord} from "./QueuedRecord";
