@@ -53,3 +53,12 @@ export const getTxDataByID = async(txId: string, contract: Contract | null) => {
         return null;
     }
 }
+
+export const executeTxById = async(txId: string, contract: Contract | null) => {
+    try{
+        return await contract?.execute(txId);
+    }
+    catch (error){
+        return null;
+    }
+}

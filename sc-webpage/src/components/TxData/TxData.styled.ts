@@ -5,7 +5,7 @@ export const TxDataWrapper = styled.div`
     background-color: #6da680;
     margin: 5px;
     padding: 0 5px;
-    min-width: 300px;
+    width: 500px;
 
     & > div {
         margin: 5px 0;

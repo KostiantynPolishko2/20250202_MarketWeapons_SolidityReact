@@ -22,11 +22,8 @@ export const QueuedRecord: FC<IQueued> = (props) => {
     return(
         <QueuedRowWrapper bgColor="#6f9ed9" onClick={handleTxId}>
             <td>{props.index}</td>
-            <td>{props.queued.txId}</td>
-            {/* <td>{props.queued.func}</td>
-            <td>{props.queued.client}</td>
-            <td>{"undefined"}</td> */}
-            <td>{props.queued.sum}</td>
+            <td className="tx-overflow" style={{maxWidth: '300px', padding: "0 5px"}}>{props.queued.txId}</td>
+            <td className="tx-overflow" style={{maxWidth: '100px', padding: "0 5px"}}>{props.queued.sum}</td>
             <td style={{width: "200px"}}>{new Date(props.queued.timestamp * 1000).toLocaleString()}</td>
         </QueuedRowWrapper>
     );

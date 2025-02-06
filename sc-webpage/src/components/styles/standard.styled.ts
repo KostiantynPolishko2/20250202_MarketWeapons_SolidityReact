@@ -33,3 +33,23 @@ export const BlockTopRight = styled.div<IBlockTopRight>`
     top: ${props => props?._top || 0}px;
     right: ${props => props?._right || 0}px;
 `;
+
+export const DisplayWrapper = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+`;
+
+interface IButtonWrapper {
+    color?: string
+}
+
+export const ButtonWrapper = styled.button<IButtonWrapper>`
+    background-color: ${props => props.color || 'grey'};
+    padding: 5px;
+    margin: 5px;
+    border-radius: 5px;
+    color: black;
+    cursor: pointer;
+`

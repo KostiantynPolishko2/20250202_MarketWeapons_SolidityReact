@@ -17,3 +17,11 @@ div.flex-container > h4 {
     border: 1px solid #ccc;
     padding: 5px;
 }
+
+.tx-overflow {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    border: 1px solid #ccc;
+    padding: 5px;
+}
