@@ -4,6 +4,7 @@
     align-items: center;
 }
 
-div.flex-container > h3 {
+div.flex-container > h4 {
     margin: 0 5px;
+    font-size: 14px;
 }

@@ -15,16 +15,16 @@ const ContractItem: FC<IContractFields> = (props) => {
     return(
         <ContractItemWrapper>
             <div className="flex-container">
-                <h3>owner:</h3>
-                <h3>{props?._owner || 'undefined'}</h3>
+                <h4>owner:</h4>
+                <h4>{props?._owner || 'undefined'}</h4>
             </div>
             <div className="flex-container">
-                <h3>contract:</h3>
-                <h3>{props?._item || 'undefined'}</h3>
+                <h4>contract:</h4>
+                <h4>{props?._item || 'undefined'}</h4>
             </div>
             <div className="flex-container">
-                <h3>times:</h3>
-                <h3>{dateTime}</h3>
+                <h4>times:</h4>
+                <h4>{dateTime}</h4>
             </div>
         </ContractItemWrapper>
     );

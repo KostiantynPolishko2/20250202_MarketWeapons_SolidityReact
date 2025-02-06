@@ -11,6 +11,10 @@ interface IBlockBottomRight {
     _right?: number,
 }
 
+interface IBlockTopRight {
+    _top?: number,
+    _right?: number,
+}
 
 export const BlockTopLeft = styled.div<IBlockTopLeft>`
     position: absolute;
@@ -21,5 +25,11 @@ export const BlockTopLeft = styled.div<IBlockTopLeft>`
 export const BlockBottomRight = styled.div<IBlockBottomRight>`
     position: absolute;
     bottom: ${props => props?._bottom || 0}px;
+    right: ${props => props?._right || 0}px;
+`;
+
+export const BlockTopRight = styled.div<IBlockTopRight>`
+    position: absolute;
+    top: ${props => props?._top || 0}px;
     right: ${props => props?._right || 0}px;
 `;
