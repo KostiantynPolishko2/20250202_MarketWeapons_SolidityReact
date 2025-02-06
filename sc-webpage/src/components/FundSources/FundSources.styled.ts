@@ -6,7 +6,7 @@ export const FundSourcesWrapper = styled.div`
     padding: 0 5px 5px 5px;
     width: 500px;
     font-size: 16px;
-    max-height: 130px;
+    max-height: 160px;
 
     & th {
         background-color: rgb(124, 47, 33);

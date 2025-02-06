@@ -52,16 +52,16 @@ const SC_Page: FC = () => {
         <BlockTopLeft _top={0} _left={10}>
           <ContractItem _owner={contractFields?._owner} _item={contractFields?._item} _time={contractFields?._time}/>
         </BlockTopLeft>
-        <BlockTopLeft _top={140} _left={10}>
+        <BlockTopLeft _top={170} _left={10}>
           <HandleTxIdContext value={handleTxId}>
             <QueuedEvents contract={lockTimesSC}/>
           </HandleTxIdContext>
         </BlockTopLeft>
-        <BlockTopRight _top={140} _right={10}>
+        <BlockTopRight _top={170} _right={10}>
           <TxData txId={txId} contract={lockTimesSC}/>
         </BlockTopRight>
         <BlockTopRight _top={0} _right={10}>
-          <FundSources/>
+          <FundSources contractLockTime={lockTimesSC} contractMarketWeapons={marketWeaponsSC}/>
         </BlockTopRight>
       </header>
     </div>
