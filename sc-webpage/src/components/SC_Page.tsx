@@ -6,8 +6,8 @@ import {getMarketWeaponsSC, getContractItem} from './utils/MarketWeaponsSC';
 import { getTimeLockSC } from './utils/TimeLockSC';
 import ContractItem from './ContractItem/ContractItem';
 import { IContractFields } from './ContractItem/ContractItem';
-import { BlockTopLeft, BlockTopRight } from './styles/standard.styled';
-import QueuedEvents from './Events/QueuedEvents';
+import { BlockTopLeft} from './styles/standard.styled';
+import QueuedEvents from './Events/Queued/QueuedEvents';
 
 const SC_Page: FC = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -19,8 +19,9 @@ const SC_Page: FC = () => {
     setMarketWeaponsSC(await getMarketWeaponsSC());
   }
 
-  const setUpLTSC = async () => {
+  const handleLTSC = async () => {
     setLockTimeSC(await getTimeLockSC());
+    // console.log(lockTimesSC);
   }
   
   const handleContractItem = async () => {
@@ -30,7 +31,7 @@ const SC_Page: FC = () => {
 
   useEffect(() => {
     setUpMWSC();  // init entity of MarketWeapons.sol
-    setUpLTSC();  // init entity of TimeLock.sol
+    handleLTSC();  // init entity of TimeLock.sol
     handleContractItem();
   }, [isLoaded]);
 
@@ -40,7 +41,7 @@ const SC_Page: FC = () => {
         <BlockTopLeft _top={0} _left={10}>
           <ContractItem _owner={contractFields?._owner} _item={contractFields?._item} _time={contractFields?._time}/>
         </BlockTopLeft>
-        <BlockTopLeft _top={120} _left={10}>
+        <BlockTopLeft _top={90} _left={10}>
           <QueuedEvents contract={lockTimesSC}/>
         </BlockTopLeft>
       </header>

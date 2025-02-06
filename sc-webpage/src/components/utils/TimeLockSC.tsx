@@ -1,5 +1,6 @@
-import {Contract, Wallet, JsonRpcProvider} from 'ethers';
+import {Contract, Wallet, JsonRpcProvider, EventLog} from 'ethers';
 import MarketWeaponsABI from '../../abi/TimeLock.json';
+import { IQueuedEvent } from '../Events/Queued/QueuedRecord';
 
 export const getTimeLockSC = async() => {
     const GANACHE_URL = "HTTP://127.0.0.1:7545"!;
@@ -14,3 +15,32 @@ export const getTimeLockSC = async() => {
 
     return _contract;
 };
+
+export const fetchQueuedEvents = async(contract: Contract | null):Promise<IQueuedEvent[] | undefined> => {
+    try {
+        // Fetch all past "Queued" events
+        if (contract){
+            const filter = contract.filters.Queued();  // Filter for all Queued events
+            const events = await contract.queryFilter(filter);
+            console.log('queued events', events);
+
+            // Map and format the events
+            const formattedEvents: IQueuedEvent[] = events.map(event => {
+                const typedEvent = event as EventLog; 
+
+                return {
+                    txId: typedEvent.args[0],
+                    timestamp: Number(typedEvent.args[1]),
+                    func: typedEvent.args[2],
+                    client: typedEvent.args[3],
+                    sum: Number(typedEvent.args[4]),
+                }
+            });
+            return formattedEvents;
+        }
+    } catch (error) {
+        // console.error('Error fetching events:', error);
+        const formattedEvents: IQueuedEvent[] = [];
+        return formattedEvents;
+    }
+}
