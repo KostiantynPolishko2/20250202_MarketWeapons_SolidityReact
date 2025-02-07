@@ -1,17 +1,22 @@
 import {Contract, Wallet, JsonRpcProvider} from 'ethers';
 import MarketWeaponsABI from '../../abi/MarketWeapons.json';
 
-export const getMarketWeaponsSC = async(privateKey: string) => {
+export const getMarketWeaponsSC = async(privateKey: string): Promise<Contract | null> => {
     const GANACHE_URL = process.env.REACT_APP_GANACHE_URL!;
     const CONTRACT_ADDRESS = process.env.REACT_APP_CONTRACT_ADDRESS_MARKET_WEAPONS!;
 
     const provider = new JsonRpcProvider(GANACHE_URL);
     await provider.ready;
 
-    const _wallet = new Wallet(privateKey, provider);
-    const _contract = new Contract(CONTRACT_ADDRESS, MarketWeaponsABI, _wallet);
-
-    return _contract;
+    try{
+        const _wallet = new Wallet(privateKey, provider);
+        const _contract = new Contract(CONTRACT_ADDRESS, MarketWeaponsABI, _wallet);
+        
+        return _contract;
+    }
+    catch{
+        return null;
+    }
 };
 
 export const getContractItem = async(contract: Contract | null) => {

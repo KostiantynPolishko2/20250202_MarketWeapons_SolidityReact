@@ -5,6 +5,7 @@ import { IQueuedEvent } from "./QueuedRecord";
 import {QueuedRecord} from "./QueuedRecord";
 import { QueuedTitle } from "./QueuedTitle";
 import { fetchQueuedEvents } from "../../utils/TimeLockSC";
+import Error404 from "../../Errors/Error404";
 
 interface IContract {
     contract: Contract | null,
@@ -12,6 +13,7 @@ interface IContract {
 }
 
 const QueuedEvents: FC<IContract> = (props) => {
+
     const [events, setEvents] = useState<IQueuedEvent[] | undefined>([]);
     
     const handleQueuedEvents = async() => {
@@ -25,7 +27,7 @@ const QueuedEvents: FC<IContract> = (props) => {
     return(
         <QueuedEventsWrapper>
             <p>Queued Events of Sells</p>
-            {events?.length === 0 ? (<p>No events found.</p>) : (
+            {events?.length === 0 || !props.contract ? (<Error404 width={690} height={400}/>) : (
             <table>
                 <QueuedTitle/>
                 {events?.map((event, index) => (

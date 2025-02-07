@@ -2,17 +2,22 @@ import {Contract, Wallet, JsonRpcProvider, EventLog, Log} from 'ethers';
 import MarketWeaponsABI from '../../abi/TimeLock.json';
 import { IQueuedEvent } from '../Events/Queued/QueuedRecord';
 
-export const getTimeLockSC = async(privateKey: string) => {
+export const getTimeLockSC = async(privateKey: string): Promise<Contract | null> => {
     const GANACHE_URL = process.env.REACT_APP_GANACHE_URL!;
     const CONTRACT_ADDRESS = process.env.REACT_APP_CONTRACT_ADDRESS_TIME_LOCK!;
 
     const provider = new JsonRpcProvider(GANACHE_URL);
     await provider.ready;
 
-    const _wallet = new Wallet(privateKey, provider);
-    const _contract = new Contract(CONTRACT_ADDRESS, MarketWeaponsABI, _wallet);
-
-    return _contract;
+    try{
+        const _wallet = new Wallet(privateKey, provider);
+        const _contract = new Contract(CONTRACT_ADDRESS, MarketWeaponsABI, _wallet);
+        
+        return _contract;
+    }
+    catch{
+        return null;
+    }
 };
 
 const getAllQueuedEvents = (events: EventLog[]):IQueuedEvent[] => {
