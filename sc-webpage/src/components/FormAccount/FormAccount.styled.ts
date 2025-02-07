@@ -35,8 +35,10 @@ export const FormAccountWrapper = styled.form<IFormAccount>`
 
     & > button {
         position: relative;
-        bottom: 60px;
-        left: 300px;
+        /* left: 300px; */
+        font-size: 14px;
+        padding: 3px 10px;
+        font-weight: 600;
     }
 `
 

@@ -9,6 +9,7 @@ export interface IAccount {
 
 interface IHandleAccount {
     handleSetAccount: (_account: string, _privateKey: string)=>void,
+    handleResetLoadedSC: ()=>void,
 }
 
 const FormAccount: FC<IHandleAccount> = (props) => {
@@ -20,9 +21,20 @@ const FormAccount: FC<IHandleAccount> = (props) => {
         const _account: string = (e.currentTarget.previousElementSibling?.previousElementSibling?.lastElementChild as HTMLInputElement).value.toString();
         const _privateKey: string = (e.currentTarget.previousElementSibling?.lastElementChild as HTMLInputElement).value.toString();
         const _form  = e.currentTarget.parentElement as HTMLFormElement | null;
+        if (_account && _privateKey){
+            _form?.reset();
+            setIsDisable(true);
+            props.handleSetAccount(_account, _privateKey);
+        }
+    }
+
+    const handleReset = (e: React.FormEvent<HTMLElement>) => {
+        e.preventDefault();
+        // window.location.reload();
+        const _form  = e.currentTarget.parentElement as HTMLFormElement | null;
         _form?.reset();
-        setIsDisable(true);
-        props.handleSetAccount(_account, _privateKey);
+        setIsDisable(false);
+        props.handleResetLoadedSC();
     }
 
     return(
@@ -35,7 +47,8 @@ const FormAccount: FC<IHandleAccount> = (props) => {
                 <label htmlFor='private_key'>key</label>
                 <input type='text' id='private_key' placeholder="key address" disabled={isDisable} style={{fontSize: '12px'}}/>
             </div>
-            <ButtonAuth isDisable={isDisable} disabled={isDisable} onClick={handleAuth}>AUTH</ButtonAuth>
+            <ButtonAuth isDisable={isDisable} disabled={isDisable} onClick={handleAuth} style={{bottom: '70px', left: '330px'}}>AUTH</ButtonAuth>
+            <ButtonAuth isDisable={false} onClick={handleReset} style={{bottom: '40px', left: '265px', backgroundColor: 'red'}}>RESET</ButtonAuth>
         </FormAccountWrapper>
     )
 }

@@ -33,6 +33,11 @@ const SC_Page: FC = () => {
     setIsContractLoaded(true);
   }
 
+  const handleResetLoadedSC = () => {
+    setIsContractLoaded(false);
+    setIsShowFundSources(false);
+  }
+
   const handleMWSC = async () => {
     setMarketWeaponsSC(await getMarketWeaponsSC(accountData?.privateKey));
     // console.log('marketWeaponsSC', marketWeaponsSC);
@@ -89,7 +94,7 @@ const SC_Page: FC = () => {
           </BlockTopRight>
         </BlockShow>
         <BlockTopLeft _top={80} _left={10}>
-          <FormAccount handleSetAccount={handleSetAccount}/>
+          <FormAccount handleSetAccount={handleSetAccount} handleResetLoadedSC={handleResetLoadedSC}/>
         </BlockTopLeft>
       </header>
     </div>
