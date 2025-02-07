@@ -5,7 +5,7 @@ interface IFormAccount {
     isDisable: boolean,
 }
 
-export const FormAccountWrapper = styled.div<IFormAccount>`
+export const FormAccountWrapper = styled.form<IFormAccount>`
     background-color:rgb(189, 216, 125);
     color: black;
     margin: 5px;

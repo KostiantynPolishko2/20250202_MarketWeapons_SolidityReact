@@ -11,6 +11,7 @@ import QueuedEvents from './Events/Queued/QueuedEvents';
 import TxData from './TxData/TxData';
 import FundSources from './FundSources/FundSources';
 import FormAccount from './FormAccount/FormAccount';
+import { IAccount } from './FormAccount/FormAccount';
 
 export const HandleTxIdContext = createContext((e: React.FormEvent<HTMLElement>):void=>{});
 
@@ -20,6 +21,12 @@ const SC_Page: FC = () => {
   const [lockTimesSC, setLockTimeSC] = useState<Contract | null>(null);
   const [contractFields, setContractFields] = useState<IContractFields>();
   const [txId, setTxId] = useState<string>("undefined");
+  const [accountData, setAccountData] = useState<IAccount>();
+
+  const handleSetAccount = (_account: string, _privateKey: string): void => {
+    setAccountData({account: _account, privateKey: _privateKey});
+    // console.log('account', accountData);
+  }
 
   const setUpMWSC = async () => {
     setMarketWeaponsSC(await getMarketWeaponsSC());
@@ -65,7 +72,7 @@ const SC_Page: FC = () => {
           <FundSources contractLockTime={lockTimesSC} contractMarketWeapons={marketWeaponsSC}/>
         </BlockTopRight>
         <BlockTopLeft _top={80} _left={10}>
-          <FormAccount/>
+          <FormAccount handleSetAccount={handleSetAccount}/>
         </BlockTopLeft>
       </header>
     </div>
