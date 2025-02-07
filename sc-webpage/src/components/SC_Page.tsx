@@ -76,7 +76,7 @@ const SC_Page: FC = () => {
         <BlockShow show={isContractLoaded}>
           <BlockTopLeft _top={170} _left={10}>
             <HandleTxIdContext value={handleTxId}>
-              {isContractLoaded? <QueuedEvents contract={lockTimesSC}/> : <></>}
+              {isContractLoaded? <QueuedEvents contract={lockTimesSC} client={accountData.account}/> : <></>}
             </HandleTxIdContext>
           </BlockTopLeft>
           <BlockTopRight _top={170} _right={10} style={{display: (txId === 'undefined')? 'none' : 'block'}}>

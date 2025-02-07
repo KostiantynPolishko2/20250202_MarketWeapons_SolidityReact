@@ -8,13 +8,14 @@ import { fetchQueuedEvents } from "../../utils/TimeLockSC";
 
 interface IContract {
     contract: Contract | null,
+    client: string,
 }
 
 const QueuedEvents: FC<IContract> = (props) => {
     const [events, setEvents] = useState<IQueuedEvent[] | undefined>([]);
     
     const handleQueuedEvents = async() => {
-        setEvents(await fetchQueuedEvents(props.contract));
+        setEvents(await fetchQueuedEvents(props.contract, props.client));
     }
 
     useEffect(() => {

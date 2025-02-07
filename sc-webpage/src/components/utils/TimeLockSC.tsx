@@ -1,4 +1,4 @@
-import {Contract, Wallet, JsonRpcProvider, EventLog} from 'ethers';
+import {Contract, Wallet, JsonRpcProvider, EventLog, Log} from 'ethers';
 import MarketWeaponsABI from '../../abi/TimeLock.json';
 import { IQueuedEvent } from '../Events/Queued/QueuedRecord';
 
@@ -15,27 +15,56 @@ export const getTimeLockSC = async(privateKey: string) => {
     return _contract;
 };
 
-export const fetchQueuedEvents = async(contract: Contract | null):Promise<IQueuedEvent[] | undefined> => {
+const getAllQueuedEvents = (events: EventLog[]):IQueuedEvent[] => {
+    // Map and format the events
+    return events.map(event => {
+        const typedEvent = event as EventLog; 
+
+        return {
+            txId: typedEvent.args[0],
+            timestamp: Number(typedEvent.args[1]),
+            func: typedEvent.args[2],
+            client: typedEvent.args[3],
+            sum: Number(typedEvent.args[4]),
+        }
+    });
+}
+
+const getClientQueuedEvents = (events: EventLog[], client: string):IQueuedEvent[] => {
+    // Map and format the events
+    return events.reduce((acc: IQueuedEvent[], event) => {
+        const typedEvent = event as EventLog;
+        
+        if (client === typedEvent.args[3]){
+            acc.push({
+                txId: typedEvent.args[0],
+                timestamp: Number(typedEvent.args[1]),
+                func: typedEvent.args[2],
+                client: typedEvent.args[3],
+                sum: Number(typedEvent.args[4]),
+            })
+        }
+
+        return acc;
+    }, []);
+}
+
+export const fetchQueuedEvents = async(contract: Contract | null, client: string):Promise<IQueuedEvent[] | undefined> => {
     try {
         // Fetch all past "Queued" events
         if (contract){
             const filter = contract.filters.Queued();  // Filter for all Queued events
-            const events = await contract.queryFilter(filter);
-            console.log('queued events', events);
+            const events: (Log | EventLog)[] = (await contract.queryFilter(filter));
+            // console.log('queued events', events);
 
-            // Map and format the events
-            const formattedEvents: IQueuedEvent[] = events.map(event => {
-                const typedEvent = event as EventLog; 
+            // filter to get only EventLog Items
+            const eventsLog = events.filter((log): log is EventLog => 'args' in log);
 
-                return {
-                    txId: typedEvent.args[0],
-                    timestamp: Number(typedEvent.args[1]),
-                    func: typedEvent.args[2],
-                    client: typedEvent.args[3],
-                    sum: Number(typedEvent.args[4]),
-                }
-            });
-            return formattedEvents;
+            if (client === process.env.REACT_APP_OWNER_CONTRACT_ADDRESS){
+                return getAllQueuedEvents(eventsLog);
+            }
+            
+            return getClientQueuedEvents(eventsLog, client);
         }
     } catch (error) {
         // console.error('Error fetching events:', error);
