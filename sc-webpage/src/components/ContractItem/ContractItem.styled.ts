@@ -4,5 +4,5 @@ export const ContractItemWrapper = styled.div`
     background-color: #63624f;
     padding: 5px;
     margin: 5px;
-    width: fit-content;
+    width: 711px;
 `;

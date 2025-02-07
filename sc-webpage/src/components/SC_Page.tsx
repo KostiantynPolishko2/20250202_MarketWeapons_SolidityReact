@@ -10,6 +10,7 @@ import { BlockTopLeft, BlockTopRight} from './styles/standard.styled';
 import QueuedEvents from './Events/Queued/QueuedEvents';
 import TxData from './TxData/TxData';
 import FundSources from './FundSources/FundSources';
+import FormAccount from './FormAccount/FormAccount';
 
 export const HandleTxIdContext = createContext((e: React.FormEvent<HTMLElement>):void=>{});
 
@@ -63,6 +64,9 @@ const SC_Page: FC = () => {
         <BlockTopRight _top={0} _right={10}>
           <FundSources contractLockTime={lockTimesSC} contractMarketWeapons={marketWeaponsSC}/>
         </BlockTopRight>
+        <BlockTopLeft _top={80} _left={10}>
+          <FormAccount/>
+        </BlockTopLeft>
       </header>
     </div>
   );
