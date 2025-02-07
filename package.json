@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "styled-components": "^6.1.14",
+    "the-new-css-reset": "^1.11.3"
+  }
+}

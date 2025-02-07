@@ -1,0 +1,27 @@
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+div.flex-container > h4 {
+    margin: 0 5px;
+    font-size: 14px;
+}
+
+.tb-row {
+    width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+
+.tx-overflow {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    border: 1px solid #ccc;
+    padding: 5px;
+}
