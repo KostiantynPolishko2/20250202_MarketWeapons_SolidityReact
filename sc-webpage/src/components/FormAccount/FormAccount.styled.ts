@@ -22,6 +22,7 @@ export const FormAccountWrapper = styled.form<IFormAccount>`
         height: 25px;
         position: relative;
         right: 100px;
+        font-size: 16px;
     }
 
     & input, button {

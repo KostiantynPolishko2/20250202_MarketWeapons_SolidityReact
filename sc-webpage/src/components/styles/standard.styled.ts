@@ -53,3 +53,11 @@ export const ButtonWrapper = styled.button<IButtonWrapper>`
     color: black;
     cursor: pointer;
 `
+
+interface IBlockShow {
+    show: boolean
+}
+
+export const BlockShow = styled.div<IBlockShow>`
+    display: ${props => props.show? 'block' : 'none'};
+`

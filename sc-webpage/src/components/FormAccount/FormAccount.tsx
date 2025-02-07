@@ -21,7 +21,7 @@ const FormAccount: FC<IHandleAccount> = (props) => {
         const _privateKey: string = (e.currentTarget.previousElementSibling?.lastElementChild as HTMLInputElement).value.toString();
         const _form  = e.currentTarget.parentElement as HTMLFormElement | null;
         _form?.reset();
-        // setIsDisable(true);
+        setIsDisable(true);
         props.handleSetAccount(_account, _privateKey);
     }
 
@@ -33,7 +33,7 @@ const FormAccount: FC<IHandleAccount> = (props) => {
             </div>
             <div className="flex-container">
                 <label htmlFor='private_key'>key</label>
-                <input type='text' id='private_key' placeholder="key address" disabled={isDisable}/>
+                <input type='text' id='private_key' placeholder="key address" disabled={isDisable} style={{fontSize: '12px'}}/>
             </div>
             <ButtonAuth isDisable={isDisable} disabled={isDisable} onClick={handleAuth}>AUTH</ButtonAuth>
         </FormAccountWrapper>
