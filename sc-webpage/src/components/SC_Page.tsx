@@ -25,9 +25,11 @@ const SC_Page: FC = () => {
   const [isShowFundSources, setIsShowFundSources] = useState<boolean>(false);
   const [isLoadContractData, setIsLoadContractData] = useState<boolean>(false);
 
+  const OWNER_CONTRACT_ADDRESS = process.env.REACT_APP_OWNER_CONTRACT_ADDRESS;
+
   const handleSetAccount = (_account: string, _privateKey: string): void => {
     setAccountData({account: _account, privateKey: _privateKey});
-    setIsShowFundSources(_account === '0x46F8DC2862bf19C5a03d6fc6E7d85077305E198d');
+    setIsShowFundSources(_account === OWNER_CONTRACT_ADDRESS);
     setIsContractLoaded(true);
   }
 
@@ -77,7 +79,7 @@ const SC_Page: FC = () => {
               {isContractLoaded? <QueuedEvents contract={lockTimesSC}/> : <></>}
             </HandleTxIdContext>
           </BlockTopLeft>
-          <BlockTopRight _top={170} _right={10}>
+          <BlockTopRight _top={170} _right={10} style={{display: (txId === 'undefined')? 'none' : 'block'}}>
             <TxData txId={txId} contract={lockTimesSC}/>
           </BlockTopRight>
         </BlockShow>

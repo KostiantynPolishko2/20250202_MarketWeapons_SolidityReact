@@ -2,8 +2,8 @@ import {Contract, Wallet, JsonRpcProvider} from 'ethers';
 import MarketWeaponsABI from '../../abi/MarketWeapons.json';
 
 export const getMarketWeaponsSC = async(privateKey: string) => {
-    const GANACHE_URL = "HTTP://127.0.0.1:7545"!;
-    const CONTRACT_ADDRESS = "0xD443dAfe8214fD2f3c2B4F30886BD2D71a2F1dF3"!;
+    const GANACHE_URL = process.env.REACT_APP_GANACHE_URL!;
+    const CONTRACT_ADDRESS = process.env.REACT_APP_CONTRACT_ADDRESS_MARKET_WEAPONS!;
 
     const provider = new JsonRpcProvider(GANACHE_URL);
     await provider.ready;

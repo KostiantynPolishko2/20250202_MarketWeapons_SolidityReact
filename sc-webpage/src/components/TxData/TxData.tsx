@@ -46,7 +46,7 @@ export const TxData: FC<ITxId> = (props)=> {
         handleTxData();
     }, [props.txId]);
 
-    if (txData === null || txId === ''){
+    if (txData === null){
         return (
         <TxDataWrapper>
             <p>Transaction Data</p>
